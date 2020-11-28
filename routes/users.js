@@ -16,7 +16,7 @@ const router = express.Router();
 //         age: 22
 //     }
 // ];
-const users = [];
+let users = [];
 
 // all routes in here are starting with /users
 
@@ -47,6 +47,16 @@ router.get('/:id', (req, res) => {
     res.send(foundUser);
 
 });
+
+// UPDATE (CRUD)
+
+router.patch('/:id', (req, res) => {
+
+});
+
+
+
+
 
 // DELETE (CRUD)
 router.delete('/:id', (req, res) => {
