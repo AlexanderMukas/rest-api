@@ -51,6 +51,21 @@ router.get('/:id', (req, res) => {
 // UPDATE (CRUD)
 
 router.patch('/:id', (req, res) => {
+    const { id } = req.params;
+    // from client form
+    const { firstName, lastName, age } = req.body;
+
+    const user = users.find( user => user.id === id);
+
+    if(firstName){
+        user.firstName = firstName;
+    } else if(lastName){
+        user.lastName = lastName;
+    } else if(age){
+        user.age = age;
+    }
+    
+    res.send(`User with id ${id} updated from the DATABASE`);
 
 });
 
