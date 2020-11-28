@@ -65,13 +65,9 @@ router.patch('/:id', (req, res) => {
         user.age = age;
     }
     
-    res.send(`User with id ${id} updated from the DATABASE`);
+    res.send(`User with id ${id} has been updated from the DATABASE`);
 
 });
-
-
-
-
 
 // DELETE (CRUD)
 router.delete('/:id', (req, res) => {
