@@ -1,5 +1,6 @@
 import express from 'express';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
+import { getUsers, createUser, getUser, updateUser, deleteUser } from '../controllers/users.js';
 
 const router = express.Router();
 
@@ -16,65 +17,80 @@ const router = express.Router();
 //         age: 22
 //     }
 // ];
-let users = [];
+// let users = [];
 
 // all routes in here are starting with /users
 
-router.get('/', (req, res) => {
-    res.send(users);
-});
+// const getUsers = (req, res) => {
+//     res.send(users);
+// };
+
+router.get('/', getUsers);
+
+// const createUser = (req, res) => {
+//     const user = req.body;
+//     const userWithId = { id: uuidv4(), ...user};
+    
+//     users.push(userWithId);
+
+//     res.send(`User with the name ${user.firstName} added to the DATABASE`);
+// }
+
 
 // CREATE (CRUD)
-router.post('/', (req, res) => {
-    const user = req.body;
-    const userWithId = { id: uuidv4(), ...user};
-    
-    users.push(userWithId);
-
-    res.send(`User with the name ${user.firstName} added to the DATABASE`);
-});
+router.post('/', createUser);
 
 
 // READ (CRUD)
 // /users/2 => req.params { id: 2}
 
-router.get('/:id', (req, res) => {
-    // const id = req.params.id;
-    const { id } = req.params;
 
-    const foundUser = users.find( user => user.id === id);
+// const getUser = (req, res) => {
+//     // const id = req.params.id;
+//     const { id } = req.params;
 
-    res.send(foundUser);
+//     const foundUser = users.find( user => user.id === id);
 
-});
+//     res.send(foundUser);
+// }
+
+
+
+router.get('/:id', getUser);
 
 // UPDATE (CRUD)
 
-router.patch('/:id', (req, res) => {
-    const { id } = req.params;
-    // from client form
-    const { firstName, lastName, age } = req.body;
 
-    const user = users.find( user => user.id === id);
+// const updateUser = (req, res) => {
+//     const { id } = req.params;
+//     // from client form
+//     const { firstName, lastName, age } = req.body;
 
-    if(firstName){
-        user.firstName = firstName;
-    } else if(lastName){
-        user.lastName = lastName;
-    } else if(age){
-        user.age = age;
-    }
+//     const user = users.find( user => user.id === id);
+
+//     if(firstName){
+//         user.firstName = firstName;
+//     } else if(lastName){
+//         user.lastName = lastName;
+//     } else if(age){
+//         user.age = age;
+//     }
     
-    res.send(`User with id ${id} has been updated from the DATABASE`);
+//     res.send(`User with id ${id} has been updated from the DATABASE`);
 
-});
+// }
+
+router.patch('/:id', updateUser);
 
 // DELETE (CRUD)
-router.delete('/:id', (req, res) => {
-    const { id } = req.params;
 
-    users = users.filter( user => user.id !== id);
-    res.send(`User with id ${id} deleted from the DATABASE`);
-});
+// const deleteUser = (req, res) => {
+//     const { id } = req.params;
+
+//     users = users.filter( user => user.id !== id);
+//     res.send(`User with id ${id} deleted from the DATABASE`);
+// }
+
+router.delete('/:id', deleteUser);
 
 export default router;
