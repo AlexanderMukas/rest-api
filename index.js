@@ -1,6 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 
+import usersRoutes from './routes/users.js';
+
 const app = express();
 const PORT = 5000;
 
@@ -8,12 +10,11 @@ app.use( bodyParser.json() );
 
 // need create some routes
 
-app.get('/', (req, res) => {
-    console.log('[TEST]!');
+app.use('/users', usersRoutes);
 
-    res.send('Hello from Homepage!');
-})
+app.get('/', (req, res) => res.send('Hello from Homepage!'));
 
 app.listen(PORT, () => {
     console.log(`Server running on port: http://localhost:${PORT}...`);
 })
+
