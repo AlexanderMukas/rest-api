@@ -24,6 +24,7 @@ router.get('/', (req, res) => {
     res.send(users);
 });
 
+// CREATE (CRUD)
 router.post('/', (req, res) => {
     const user = req.body;
     const userWithId = { id: uuidv4(), ...user};
@@ -34,6 +35,7 @@ router.post('/', (req, res) => {
 });
 
 
+// READ (CRUD)
 // /users/2 => req.params { id: 2}
 
 router.get('/:id', (req, res) => {
@@ -44,6 +46,14 @@ router.get('/:id', (req, res) => {
 
     res.send(foundUser);
 
+});
+
+// DELETE (CRUD)
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+
+    users = users.filter( user => user.id !== id);
+    res.send(`User with id ${id} deleted from the DATABASE`);
 });
 
 export default router;
